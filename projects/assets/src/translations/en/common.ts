@@ -32,6 +32,7 @@ export const common = {
     loaded: 'Loaded',
     results: 'Results',
     of: 'of',
+    required: 'required',
   },
   pageMetaResolver: {
     category: {
