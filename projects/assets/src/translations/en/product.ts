@@ -82,6 +82,7 @@ export const product = {
       'Thank you for the review! Note that reviews may require review before appearing here.',
     postReviewFail:
       'Something went wrong while posting your review. Please try again later.',
+    ratedOutOf: 'Rated: {{rating}} out of 5',
   },
   productCarousel: {
     carouselLabel: 'Carousel, {{title}}',
