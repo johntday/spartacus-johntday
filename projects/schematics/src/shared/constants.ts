@@ -183,6 +183,7 @@ export const CDS_SPARTACUS_EVENT_SERVICE = 'SpartacusEventService';
 export const CONSENT_SERVICE = 'ConsentService';
 export const EVENT_SERVICE = 'EventService';
 export const CDS_CONFIG = 'CdsConfig';
+export const CONTENTFUL_CONFIG = 'ContentfulConfig';
 export const SMART_EDIT_CONFIG = 'SmartEditConfig';
 export const ADDRESS_BOOK_COMPONENT_SERVICE = 'AddressBookComponentService';
 export const CHECKOUT_GUARD = 'CheckoutGuard';

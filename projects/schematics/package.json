@@ -64,6 +64,7 @@
       "@spartacus/user",
       "@spartacus/cdc",
       "@spartacus/cds",
+      "@spartacus/contentful",
       "@spartacus/digital-payments",
       "@spartacus/epd-visualization",
       "@spartacus/s4om",

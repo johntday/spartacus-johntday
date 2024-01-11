@@ -315,6 +315,19 @@
     "@spartacus/tracking": "6.7.0",
     "rxjs": "^6.6.0"
   },
+  "@spartacus/contentful": {
+    "@angular-devkit/schematics": "^15.2.9",
+    "@angular/common": "^15.2.9",
+    "@angular/core": "^15.2.9",
+    "@angular/router": "^15.2.9",
+    "@contentful/live-preview": "^2.15.1",
+    "@ngrx/store": "^15.3.0",
+    "@spartacus/core": "^6.7.0",
+    "@spartacus/schematics": "^6.7.0",
+    "@spartacus/storefront": "^6.7.0",
+    "contentful": "^10.6.14",
+    "rxjs": "^6.6.0"
+  },
   "@spartacus/digital-payments": {
     "@angular-devkit/schematics": "^15.2.9",
     "@angular/common": "^15.2.9",
@@ -377,6 +390,7 @@
     "@angular/pwa": "^15.2.9",
     "@angular/router": "^15.2.9",
     "@angular/service-worker": "^15.2.9",
+    "@contentful/live-preview": "^2.15.1",
     "@fontsource/open-sans": "^4.5.14",
     "@fortawesome/fontawesome-free": "6.4.2",
     "@ng-select/ng-select": "^10.0.3",
@@ -388,6 +402,7 @@
     "angular-oauth2-oidc": "^15.0.1",
     "bootstrap": "^4.6.2",
     "comment-json": "^4.2.3",
+    "contentful": "^10.6.14",
     "express": "^4.18.2",
     "hamburgers": "^1.2.1",
     "i18next": "^21.10.0",

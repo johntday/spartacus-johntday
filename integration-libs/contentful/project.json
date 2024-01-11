@@ -1,0 +1,47 @@
+{
+  "name": "contentful",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "integration-libs/contentful/src",
+  "prefix": "cx",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:ng-packagr",
+      "options": {
+        "tsConfig": "integration-libs/contentful/tsconfig.lib.json",
+        "project": "integration-libs/contentful/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "integration-libs/contentful/tsconfig.lib.prod.json"
+        }
+      }
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "integration-libs/contentful/src/test.ts",
+        "tsConfig": "integration-libs/contentful/tsconfig.spec.json",
+        "polyfills": ["zone.js", "zone.js/testing"],
+        "karmaConfig": "integration-libs/contentful/karma.conf.js"
+      }
+    },
+    "test-jest": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run test:schematics",
+        "cwd": "integration-libs/contentful"
+      }
+    },
+    "lint": {
+      "executor": "@angular-eslint/builder:lint",
+      "options": {
+        "lintFilePatterns": [
+          "integration-libs/contentful/**/*.ts",
+          "integration-libs/contentful/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["type:feature", "type:integration"]
+}

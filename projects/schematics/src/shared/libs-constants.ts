@@ -185,6 +185,7 @@ export const SPARTACUS_USER_PROFILE_ASSETS = `@spartacus/user/profile/assets`;
 export const SPARTACUS_USER_PROFILE_ROOT = `@spartacus/user/profile/root`;
 
 export const SPARTACUS_CDS = `@spartacus/cds`;
+export const SPARTACUS_CONTENTFUL = `@spartacus/contentful`;
 
 export const SPARTACUS_CDC = `@spartacus/cdc`;
 export const SPARTACUS_CDC_ROOT = `@spartacus/cdc/root`;
@@ -279,6 +280,7 @@ export const CDC_FEATURE_NAME = 'CDC';
 export const CDC_B2B_FEATURE_NAME = 'CDC-B2B';
 
 export const CDS_FEATURE_NAME = 'CDS';
+export const CONTENTFUL_FEATURE_NAME = 'Contentful';
 
 export const DIGITAL_PAYMENTS_FEATURE_NAME = 'Digital-Payments';
 

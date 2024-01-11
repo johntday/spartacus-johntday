@@ -1,0 +1,38 @@
+{
+  "name": "@spartacus/contentful",
+  "version": "6.7.0",
+  "description": "Contentful library for Spartacus",
+  "keywords": [
+    "spartacus",
+    "storefront",
+    "contentful"
+  ],
+  "homepage": "https://github.com/johntday/spartacus",
+  "repository": "https://github.com/johntday/spartacus/tree/develop/integration-libs/contentful",
+  "license": "LGPL-3.0-only",
+  "scripts": {
+    "build:schematics": "npm run clean:schematics && ../../node_modules/.bin/tsc -p ./tsconfig.schematics.json",
+    "clean:schematics": "../../node_modules/.bin/rimraf --glob \"src/schematics/**/*.js\" \"src/schematics/**/*.js.map\" \"src/schematics/**/*.d.ts\"",
+    "test:schematics": "npm --prefix ../../projects/schematics/ run clean && npm run clean:schematics && ../../node_modules/.bin/jest --config ./jest.schematics.config.js"
+  },
+  "dependencies": {
+    "tslib": "^2.6.2"
+  },
+  "peerDependencies": {
+    "@angular-devkit/schematics": "^15.2.9",
+    "@angular/common": "^15.2.9",
+    "@angular/core": "^15.2.9",
+    "@angular/router": "^15.2.9",
+    "@contentful/live-preview": "^2.15.1",
+    "@ngrx/store": "^15.3.0",
+    "@spartacus/core": "^6.7.0",
+    "@spartacus/schematics": "^6.7.0",
+    "@spartacus/storefront": "^6.7.0",
+    "contentful": "^10.6.14",
+    "rxjs": "^6.6.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "schematics": "./src/schematics/collection.json"
+}

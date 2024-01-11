@@ -34,6 +34,7 @@ SPARTACUS_PROJECTS=(
         "dist/smartedit:feature-libs/smartedit"
         "dist/customer-ticketing:feature-libs/customer-ticketing"
         "dist/cds:integration-libs/cds"
+        "dist/contentful:integration-libs/contentful"
         "dist/cdc:integration-libs/cdc"
         "dist/epd-visualization:integration-libs/epd-visualization"
         "dist/product-configurator:feature-libs/product-configurator"
