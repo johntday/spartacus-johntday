@@ -13,7 +13,7 @@ import {
   PageType,
   SMART_EDIT_CONTEXT,
 } from '@spartacus/core';
-import { ContentfulGraphqlService } from './contentful-graphql.service';
+import { ContentfulService } from './contentful.service';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +27,7 @@ export class ContentfulCmsPageAdapter implements CmsPageAdapter {
     protected http: HttpClient,
     protected occEndpoints: OccEndpointsService,
     protected converter: ConverterService,
-    protected contentfulService: ContentfulGraphqlService
+    protected contentfulService: ContentfulService
   ) {}
 
   /**
@@ -38,14 +38,11 @@ export class ContentfulCmsPageAdapter implements CmsPageAdapter {
     if (this.contentfulService.isManagedPage(pageContext)) {
       return this.contentfulService.graphql(pageContext);
       // ???
-      //   .pipe(
+      // .pipe(
       //   tap((cmsPageResponse) => {
-      //     console.log(
-      //       'ContentfulOccCmsPageNormalizer.output',
-      //       JSON.stringify(cmsPageResponse, null, 2)
-      //     );
+      //     console.log('ContentfulOccCmsPageNormalizer.output', JSON.stringify(cmsPageResponse, null, 2));
       //   })
-      // );
+      // )
     }
 
     const params = this.getPagesRequestParams(pageContext);
@@ -74,9 +71,7 @@ export class ContentfulCmsPageAdapter implements CmsPageAdapter {
       : this.occEndpoints.buildUrl('pages', {
           queryParams: params,
         });
-    return this.http
-      .get(endpoint, { headers: this.headers })
-      .pipe(this.converter.pipeable(CMS_PAGE_NORMALIZER));
+    return this.http.get(endpoint, { headers: this.headers }).pipe(this.converter.pipeable(CMS_PAGE_NORMALIZER));
   }
 
   /**

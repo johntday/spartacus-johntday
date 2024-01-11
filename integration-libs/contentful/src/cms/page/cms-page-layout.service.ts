@@ -26,7 +26,9 @@ export class ContentfulPageLayoutService implements OnDestroy {
     private breakpointService: BreakpointService,
     private unifiedInjector: UnifiedInjector
   ) {
-    this.subscription.add(this.unifiedInjector.getMulti(PAGE_LAYOUT_HANDLER).subscribe((handlers) => (this.handlers = handlers)));
+    this.subscription.add(
+      this.unifiedInjector.getMulti(PAGE_LAYOUT_HANDLER).subscribe((handlers) => (this.handlers = handlers))
+    );
   }
 
   // Prints warn messages for missing layout configs.
@@ -36,7 +38,8 @@ export class ContentfulPageLayoutService implements OnDestroy {
   private logSlots: any = {};
 
   getSlots(section?: string): Observable<string[]> {
-    this.logger.info('ContentfulPageLayoutService.getSlots', section);
+    //???
+    // this.logger.info('ContentfulPageLayoutService.getSlots', section);
     return combineLatest([this.page$, this.breakpointService.breakpoint$]).pipe(
       map(([page, breakpoint]) => {
         const pageTemplate = page.template;
@@ -85,7 +88,8 @@ export class ContentfulPageLayoutService implements OnDestroy {
   }
 
   private resolveSlots(page: Page, section: string | undefined, breakpoint: BREAKPOINT): string[] {
-    this.logger.info('ContentfulPageLayoutService.resolveSlots', page, section, breakpoint);
+    // ???
+    // this.logger.info('ContentfulPageLayoutService.resolveSlots', page, section, breakpoint);
     const config = this.getSlotConfig(page.template ?? '', 'slots', section, breakpoint);
     if (config && config.slots) {
       const pageSlots = page.slots ? Object.keys(page.slots) : [];
@@ -116,7 +120,12 @@ export class ContentfulPageLayoutService implements OnDestroy {
    * no configuration available for the given breakpoint the default slot
    * configuration is returned.
    */
-  protected getSlotConfig(templateUid: string, configAttribute: string, section?: string, breakpoint?: BREAKPOINT): SlotConfig | undefined {
+  protected getSlotConfig(
+    templateUid: string,
+    configAttribute: string,
+    section?: string,
+    breakpoint?: BREAKPOINT
+  ): SlotConfig | undefined {
     if (!this.config.layoutSlots) {
       return undefined;
     }
@@ -132,7 +141,12 @@ export class ContentfulPageLayoutService implements OnDestroy {
     return undefined;
   }
 
-  protected getSlotConfigForSection(templateUid: string, configAttribute: string, section?: string, breakpoint?: BREAKPOINT): SlotConfig | undefined {
+  protected getSlotConfigForSection(
+    templateUid: string,
+    configAttribute: string,
+    section?: string,
+    breakpoint?: BREAKPOINT
+  ): SlotConfig | undefined {
     const pageTemplateConfig: any = this.config.layoutSlots?.[templateUid];
 
     if (!pageTemplateConfig || !section) {
@@ -141,7 +155,9 @@ export class ContentfulPageLayoutService implements OnDestroy {
 
     // if there's no section config on the page layout
     // we fall back to the global section config
-    const sectionConfig = pageTemplateConfig[section] ? pageTemplateConfig[section] : this.config.layoutSlots?.[section];
+    const sectionConfig = pageTemplateConfig[section]
+      ? pageTemplateConfig[section]
+      : this.config.layoutSlots?.[section];
 
     if (!sectionConfig) {
       return undefined;
@@ -164,7 +180,11 @@ export class ContentfulPageLayoutService implements OnDestroy {
    * If there's no specific configuration for the breakpoint,
    * the closest available configuration will be returned.
    */
-  protected getResponsiveSlotConfig(layoutSlotConfig: LayoutSlotConfig, configAttribute: string, breakpoint?: BREAKPOINT): SlotConfig {
+  protected getResponsiveSlotConfig(
+    layoutSlotConfig: LayoutSlotConfig,
+    configAttribute: string,
+    breakpoint?: BREAKPOINT
+  ): SlotConfig {
     let slotConfig = <SlotConfig>layoutSlotConfig;
 
     // fallback to default slot config
@@ -206,7 +226,9 @@ export class ContentfulPageLayoutService implements OnDestroy {
 
     const cacheKey = section || page.template;
     if (cacheKey && !this.warnLogMessages[cacheKey]) {
-      this.logger.warn(`No layout config found for ${cacheKey}, you can configure a 'LayoutConfig' to control the rendering of page slots.`);
+      this.logger.warn(
+        `No layout config found for ${cacheKey}, you can configure a 'LayoutConfig' to control the rendering of page slots.`
+      );
       this.warnLogMessages[cacheKey] = true;
     }
   }

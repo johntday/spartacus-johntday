@@ -2,12 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
-import {
-  CmsPageAdapter,
-  CmsStructureConfigService,
-  CmsStructureModel,
-  PageContext,
-} from '@spartacus/core';
+import { CmsPageAdapter, CmsStructureConfigService, CmsStructureModel, PageContext } from '@spartacus/core';
 
 @Injectable({
   providedIn: 'root',
@@ -24,38 +19,29 @@ export class ContentfulCmsPageConnector {
    * configuration (see `CmsStructureConfigService`).
    */
   get(pageContext: PageContext): Observable<CmsStructureModel> {
-    return this.cmsStructureConfigService
-      .shouldIgnoreBackend(pageContext.id)
-      .pipe(
-        switchMap((loadFromConfig) => {
-          // console.log(
-          //   'ContentfulCmsPageConnector.get',
-          //   pageContext.id,
-          //   loadFromConfig
-          // );
-          if (!loadFromConfig) {
-            return this.cmsPageAdapter.load(pageContext).pipe(
-              catchError((error) => {
-                if (
-                  error instanceof HttpErrorResponse &&
-                  error.status === 400
-                ) {
-                  return of({});
-                } else {
-                  return throwError(error);
-                }
-              })
-              // tap((page) => {
-              //   console.log('ContentfulCmsPageConnector.get.cmsPageAdapter.load', pageContext.id, page);
-              //   console.log(JSON.stringify(page, null, 2));
-              // })
-            );
-          } else {
-            return of({});
-          }
-        }),
-        switchMap((page) => this.mergeDefaultPageStructure(pageContext, page))
-      );
+    return this.cmsStructureConfigService.shouldIgnoreBackend(pageContext.id).pipe(
+      switchMap((loadFromConfig) => {
+        // console.log('ContentfulCmsPageConnector.get', pageContext.id, loadFromConfig);
+        if (!loadFromConfig) {
+          return this.cmsPageAdapter.load(pageContext).pipe(
+            catchError((error) => {
+              if (error instanceof HttpErrorResponse && error.status === 400) {
+                return of({});
+              } else {
+                return throwError(error);
+              }
+            })
+            // tap((page) => {
+            //   console.log('ContentfulCmsPageConnector.get.cmsPageAdapter.load', pageContext.id, page);
+            //   console.log(JSON.stringify(page, null, 2));
+            // })
+          );
+        } else {
+          return of({});
+        }
+      }),
+      switchMap((page) => this.mergeDefaultPageStructure(pageContext, page))
+    );
   }
 
   /**
@@ -68,9 +54,6 @@ export class ContentfulCmsPageConnector {
     pageContext: PageContext,
     pageStructure: CmsStructureModel
   ): Observable<CmsStructureModel> {
-    return this.cmsStructureConfigService.mergePageStructure(
-      pageContext.id,
-      pageStructure
-    );
+    return this.cmsStructureConfigService.mergePageStructure(pageContext.id, pageStructure);
   }
 }

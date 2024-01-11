@@ -42,10 +42,12 @@ export namespace Contentful {
   }
 
   export interface CmsSiteContextComponent {
+    sys?: Sys;
     context: string;
   }
 
   export interface CmsLinkComponent {
+    sys?: Sys;
     contentPageLabelOrId?: string;
     linkName: string;
     external?: boolean;
@@ -54,6 +56,7 @@ export namespace Contentful {
   }
 
   export interface CmsSearchBoxComponent {
+    sys?: Sys;
     maxSuggestions?: number;
     maxProducts?: number;
     displaySuggestions?: boolean;
@@ -64,6 +67,7 @@ export namespace Contentful {
   }
 
   export interface CmsNavigationComponent {
+    sys?: Sys;
     styleClass?: string;
     wrapAfter?: string;
     notice?: string;
@@ -73,6 +77,7 @@ export namespace Contentful {
   }
 
   export interface CmsMiniCartComponent {
+    sys?: Sys;
     shownProductCount?: number;
     totalDisplay?: string;
     title?: string;
@@ -175,4 +180,11 @@ export namespace Contentful {
       cmsPageCollection?: CmsPageCollection;
     };
   }
+}
+
+export interface ContentfulEndpoints {
+  /**
+   * Get page data from Contentful.
+   */
+  page: string;
 }

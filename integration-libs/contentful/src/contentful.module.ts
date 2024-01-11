@@ -1,11 +1,11 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { provideConfigValidator, provideDefaultConfig } from '@spartacus/core';
-import { ContentfulCmsPageModule } from './cms/page';
 import {
   ContentfulConfig,
   contentfulConfigValidator,
   DEFAULT_CONTENTFUL_CONFIG,
 } from './config';
+import { ContentfulCmsPageModule } from './cms/page';
 
 @NgModule({
   imports: [ContentfulCmsPageModule],

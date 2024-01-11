@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
-  CmsBannerComponent,
   CmsBannerComponentMedia,
   CmsComponent,
-  CmsProductCarouselComponent,
   CmsResponsiveBannerComponentMedia,
   CmsStructureModel,
   ContentSlotComponentData,
@@ -17,15 +15,10 @@ import {
 import { Contentful } from './cms-page.model';
 
 @Injectable({ providedIn: 'root' })
-export class ContentfulOccCmsPageNormalizer
-  implements Converter<Contentful.CmsPageResponse, CmsStructureModel>
-{
+export class ContentfulOccCmsPageNormalizer implements Converter<Contentful.CmsPageResponse, CmsStructureModel> {
   uniqueSourceSlots: Contentful.CmsSlot[] = [];
 
-  convert(
-    source: Contentful.CmsPageResponse,
-    target: CmsStructureModel = {}
-  ): CmsStructureModel {
+  convert(source: Contentful.CmsPageResponse, target: CmsStructureModel = {}): CmsStructureModel {
     // console.log('ContentfulOccCmsPageNormalizer.input', JSON.stringify(source, null, 2));
     this.normalizePageData(source, target);
     this.normalizePageSlotData(source, target);
@@ -37,10 +30,7 @@ export class ContentfulOccCmsPageNormalizer
   /**
    * Converts the OCC cms page model to the `Page` in the `CmsStructureModel`.
    */
-  protected normalizePageData(
-    source: Contentful.CmsPageResponse,
-    target: CmsStructureModel
-  ): void {
+  protected normalizePageData(source: Contentful.CmsPageResponse, target: CmsStructureModel): void {
     const sourcePage = source.data?.cmsPageCollection?.items?.[0];
     const sourceTemplate = sourcePage?.template;
     if (!source || !sourcePage) {
@@ -65,25 +55,14 @@ export class ContentfulOccCmsPageNormalizer
   /**
    * Adds a ContentSlotData for each page slot in the `CmsStructureModel`.
    */
-  protected normalizePageSlotData(
-    source: Contentful.CmsPageResponse,
-    target: CmsStructureModel
-  ): void {
+  protected normalizePageSlotData(source: Contentful.CmsPageResponse, target: CmsStructureModel): void {
     target.page = target.page ?? {};
     target.page.slots = {};
 
-    const mainSlots =
-      source.data?.cmsPageCollection?.items?.[0]?.template?.slotsCollection
-        ?.items;
-    const headerSlots =
-      source.data?.cmsPageCollection?.items?.[0]?.template?.header
-        ?.slotsCollection?.items;
-    const footerSlots =
-      source.data?.cmsPageCollection?.items?.[0]?.template?.footer
-        ?.slotsCollection?.items;
-    const navigationSlots =
-      source.data?.cmsPageCollection?.items?.[0]?.template?.navigation
-        ?.slotsCollection?.items;
+    const mainSlots = source.data?.cmsPageCollection?.items?.[0]?.template?.slotsCollection?.items;
+    const headerSlots = source.data?.cmsPageCollection?.items?.[0]?.template?.header?.slotsCollection?.items;
+    const footerSlots = source.data?.cmsPageCollection?.items?.[0]?.template?.footer?.slotsCollection?.items;
+    const navigationSlots = source.data?.cmsPageCollection?.items?.[0]?.template?.navigation?.slotsCollection?.items;
 
     const sourceSlots = mainSlots
       ?.concat(headerSlots ?? [])
@@ -104,10 +83,7 @@ export class ContentfulOccCmsPageNormalizer
   /**
    * Registers the `ContentSlotComponentData` for each component.
    */
-  protected normalizePageComponentData(
-    _source: Contentful.CmsPageResponse,
-    target: CmsStructureModel
-  ): void {
+  protected normalizePageComponentData(_source: Contentful.CmsPageResponse, target: CmsStructureModel): void {
     if (!this.uniqueSourceSlots) {
       return;
     }
@@ -137,32 +113,17 @@ export class ContentfulOccCmsPageNormalizer
    * If the data is not populated in this payload, it is loaded separately
    * (`OccCmsComponentAdapter`).
    */
-  protected normalizeComponentData(
-    _source: Contentful.CmsPageResponse,
-    target: CmsStructureModel
-  ): void {
+  protected normalizeComponentData(_source: Contentful.CmsPageResponse, target: CmsStructureModel): void {
     if (!this.uniqueSourceSlots) {
       return;
     }
 
     for (const slot of this.uniqueSourceSlots) {
       for (const component of slot.componentCollection?.items ?? []) {
-        // while we're hoping to get this right from the backend api,
-        // the OCC api stills seems out of sync with the right model.
-        // if (component.modifiedtime) {
-        //   component.modifiedTime = component.modifiedtime;
-        //   delete component.modifiedtime;
-        // }
-
-        // we don't put properties into component state
-        // if (component.data) {
-        //   component.data = undefined;
-        // }
         if (!target.components) {
           target.components = [];
         }
-        const targetComponent: CmsComponent =
-          this.normalizeComponent(component);
+        const targetComponent: CmsComponent = this.normalizeComponent(component);
         target.components.push(targetComponent);
       }
     }
@@ -171,10 +132,7 @@ export class ContentfulOccCmsPageNormalizer
   /**
    * Normalizes the page robot string to an array of `PageRobotsMeta` items.
    */
-  protected normalizeRobots(
-    sourceRobot: string | undefined,
-    target: Page
-  ): void {
+  protected normalizeRobots(sourceRobot: string | undefined, target: Page): void {
     const robots = [];
     if (sourceRobot) {
       switch (sourceRobot) {
@@ -204,7 +162,7 @@ export class ContentfulOccCmsPageNormalizer
     if (
       source.typeCode === undefined ||
       ![
-        'CmsParagraphComponent',
+        'CMSParagraphComponent',
         'BreadcrumbComponent',
         'SimpleBannerComponent',
         'ProductCarouselComponent',
@@ -217,18 +175,13 @@ export class ContentfulOccCmsPageNormalizer
         'CMSFlexComponent',
       ].includes(source.typeCode)
     ) {
-      throw new Error(
-        `Invalid typeCode '${source.typeCode}' for component.uid '${source.uid}'`
-      );
+      throw new Error(`Invalid typeCode '${source.typeCode}' for component.uid '${source.uid}'`);
     }
 
-    const target = flattenObj(source) as CmsBannerComponent;
-    target.otherProperties = { id: source.sys?.id };
+    const target = flattenObj(source);
 
     if (source.typeCode === 'SimpleBannerComponent') {
-      const sourceBannerComponent = <Contentful.CmsBannerComponent>(
-        source.cmsBannerComponent
-      );
+      const sourceBannerComponent = <Contentful.CmsBannerComponent>source.cmsBannerComponent;
       const mobile = sourceBannerComponent?.media?.mobile;
       const tablet = sourceBannerComponent?.media?.tablet;
       const desktop = sourceBannerComponent?.media?.desktop;
@@ -236,23 +189,19 @@ export class ContentfulOccCmsPageNormalizer
       const altText = sourceBannerComponent?.media?.altText;
 
       if (!mobile && !tablet && desktop && !widescreen) {
-        target.media = this.normalizeMedia(desktop, altText);
+        target['media'] = this.normalizeMedia(desktop, altText);
       } else if (mobile && tablet && desktop && widescreen) {
-        target.media = {
+        target['media'] = {
           mobile: this.normalizeMedia(mobile, altText),
           tablet: this.normalizeMedia(tablet, altText),
           desktop: this.normalizeMedia(desktop, altText),
           widescreen: this.normalizeMedia(widescreen, altText),
         } as CmsResponsiveBannerComponentMedia;
       } else {
-        throw new Error(
-          `Invalid media configuration for component.uid '${source.uid}'`
-        );
+        throw new Error(`Invalid media configuration for component.uid '${source.uid}'`);
       }
     } else if (source.typeCode === 'ProductCarouselComponent') {
-      const sourceProductCarouselComponent = <
-        Contentful.CmsProductCarouselComponent
-      >source.cmsProductCarouselComponent;
+      const sourceProductCarouselComponent = <Contentful.CmsProductCarouselComponent>source.cmsProductCarouselComponent;
 
       if (
         sourceProductCarouselComponent &&
@@ -260,20 +209,16 @@ export class ContentfulOccCmsPageNormalizer
         Array.isArray(sourceProductCarouselComponent.productCodes) &&
         sourceProductCarouselComponent.productCodes.length > 0
       ) {
-        const p: CmsProductCarouselComponent = target;
-        p.productCodes = sourceProductCarouselComponent.productCodes.join(' ');
+        target['productCodes'] = sourceProductCarouselComponent.productCodes.join(' ');
       }
     }
 
     // todo: ??? add other component types
 
-    return target;
+    return target as CmsComponent;
   }
 
-  protected normalizeMedia(
-    source: Contentful.Image | undefined,
-    altText: string | undefined
-  ): CmsBannerComponentMedia {
+  protected normalizeMedia(source: Contentful.Image | undefined, altText: string | undefined): CmsBannerComponentMedia {
     return {
       url: source?.url,
       altText: source?.title || altText || '',

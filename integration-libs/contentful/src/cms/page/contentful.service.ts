@@ -1,19 +1,15 @@
 import { Injectable } from '@angular/core';
-import {
-  CmsStructureModel,
-  ConverterService,
-  PageContext,
-} from '@spartacus/core';
-import { Observable } from 'rxjs';
+import { CmsStructureModel, ConverterService, PageContext } from '@spartacus/core';
+import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Contentful } from './cms-page.model';
 import { CONTENTFUL_CMS_PAGE_NORMALIZER } from './cms-page.converters';
-import { ContentfulConfig } from '../../config';
+import { ContentfulConfig } from '../../config/contentful-config';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ContentfulGraphqlService {
+export class ContentfulService {
   constructor(
     protected http: HttpClient,
     protected converter: ConverterService,
@@ -31,11 +27,14 @@ export class ContentfulGraphqlService {
     return this.getManagedPages().includes(pageContext.id);
   }
 
+  load(pageContext: PageContext): Observable<CmsStructureModel> {
+    console.log('load', pageContext);
+    return of({});
+  }
+
   graphql(pageContext: PageContext): Observable<CmsStructureModel> {
     return this.http
-      .get<Contentful.CmsPageResponse>(this.getPageEndpoint(pageContext), {
-        headers: this.generateHeaders(),
-      })
+      .get<Contentful.CmsPageResponse>(this.getPageEndpoint(pageContext), { headers: this.generateHeaders() })
       .pipe(this.converter.pipeable(CONTENTFUL_CMS_PAGE_NORMALIZER));
     // .pipe((cmsPageResponse) => {
     //   console.log('ContentfulService.graphql', pageContext.id, JSON.stringify(cmsPageResponse, null, 2));
@@ -62,7 +61,7 @@ export class ContentfulGraphqlService {
     const pageId = pageContext.id; //.replace(/\//g, '');
 
     const query =
-      'fragment componentFields on CmsComponent{uid,typeCode,cmsParagraphComponent{sys{id},title,content}cmsBannerComponent{headline,content,urlLink,external,contentPage,product,category,media{name,altText,desktop{title,contentType,url,width,height}}}categoryNavigationComponent{description,wrapAfter,notice,showLanguageCurrency,resetMenuOnClose,navigationNode}footerNavigationComponent{description,wrapAfter,notice,showLanguageCurrency,resetMenuOnClose,navigationNode}languageComponent{context}currencyComponent{context}cmsMiniCartComponent{shownProductCount,totalDisplay,title,lightboxBannerComponent}cmsLinkComponent{linkName,external,url,target,contentPageLabelOrId}cmsSearchBoxComponent{maxSuggestions,maxProducts,displaySuggestions,displayProducts,displayProductImages,waitTimeBeforeRequest,minCharactersBeforeRequest}cmsProductCarouselComponent{title,popup,scroll,productCodes}}' +
+      'fragment componentFields on CmsComponent{uid,typeCode,cmsParagraphComponent{sys{id},title,content}cmsBannerComponent{sys{id},headline,content,urlLink,external,contentPage,product,category,media{name,altText,desktop{title,contentType,url,width,height}}}categoryNavigationComponent{description,wrapAfter,notice,showLanguageCurrency,resetMenuOnClose,navigationNode}footerNavigationComponent{description,wrapAfter,notice,showLanguageCurrency,resetMenuOnClose,navigationNode}languageComponent{context}currencyComponent{context}cmsMiniCartComponent{shownProductCount,totalDisplay,title,lightboxBannerComponent}cmsLinkComponent{linkName,external,url,target,contentPageLabelOrId}cmsSearchBoxComponent{maxSuggestions,maxProducts,displaySuggestions,displayProducts,displayProductImages,waitTimeBeforeRequest,minCharactersBeforeRequest}cmsProductCarouselComponent{sys{id},title,popup,scroll,productCodes}}' +
       `{cmsPageCollection(preview:${preview},limit:1,where:{label:"${pageId}"}){items{label,uid,name,title,description,robot,template{uid,name,header{uid,attributes,slotsCollection(limit:20){items{uid,componentCollection(limit:10){items{...componentFields}}}}}footer{uid,attributes,slotsCollection(limit:20){items{uid,componentCollection(limit:10){items{...componentFields}}}}}navigation{uid,attributes,slotsCollection(limit:20){items{uid,componentCollection(limit:10){items{...componentFields}}}}}slotsCollection(limit:20){items{uid,componentCollection(limit:10){items{...componentFields}}}}}}}}`;
 
     return `${baseUrl}/spaces/${space}/environments/${env}?query=${query}`;

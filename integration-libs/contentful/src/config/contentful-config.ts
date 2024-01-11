@@ -8,7 +8,7 @@ import { Config } from '@spartacus/core';
 export abstract class ContentfulConfig {
   contentful?: {
     baseUrl: string;
-    // query?: ContentfulEndpoints;
+    // endpoints?: ContentfulEndpoints;
     managedPages: string[];
 
     preview: boolean;
@@ -23,4 +23,29 @@ export abstract class ContentfulConfig {
 
 declare module '@spartacus/core' {
   interface Config extends ContentfulConfig {}
+}
+
+export const DEFAULT_CONTENTFUL_CONFIG: ContentfulConfig = {
+  contentful: {
+    baseUrl: 'https://graphql.contentful.com/content/v1/',
+    // endpoints: {
+    //   page: 'ignore for now',//todo
+    // },
+    managedPages: [],
+    preview: false,
+    CONTENTFUL_SPACE_ID: '',
+    CONTENTFUL_ENVIRONMENT: '',
+    CONTENTFUL_ACCESS_TOKEN: '',
+    CONTENTFUL_PREVIEW_ACCESS_TOKEN: '',
+    CONTENTFUL_CMA_TOKEN: '',
+    CONTENTFUL_PREVIEW_HOST: 'preview.contentful.com',
+  },
+};
+
+export interface ContentfulCmsComponent {
+  id: string;
+}
+
+declare module '@spartacus/core' {
+  interface CmsComponent extends ContentfulCmsComponent {}
 }
