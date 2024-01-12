@@ -5,27 +5,21 @@
  */
 
 import { SchematicsException } from '@angular-devkit/schematics';
-import {
-  ASM_SCHEMATICS_CONFIG,
-  ASM_CUSTOMER_360_SCHEMATICS_CONFIG,
-} from './lib-configs/asm-schematics-config';
+import { ASM_CUSTOMER_360_SCHEMATICS_CONFIG, ASM_SCHEMATICS_CONFIG } from './lib-configs/asm-schematics-config';
 import {
   CART_BASE_SCHEMATICS_CONFIG,
   CART_IMPORT_EXPORT_SCHEMATICS_CONFIG,
   CART_QUICK_ORDER_SCHEMATICS_CONFIG,
   CART_SAVED_CART_SCHEMATICS_CONFIG,
-  CART_WISHLIST_SCHEMATICS_CONFIG,
+  CART_WISHLIST_SCHEMATICS_CONFIG
 } from './lib-configs/cart-schematics-config';
 import {
   CHECKOUT_B2B_SCHEMATICS_CONFIG,
   CHECKOUT_BASE_SCHEMATICS_CONFIG,
-  CHECKOUT_SCHEDULED_REPLENISHMENT_SCHEMATICS_CONFIG,
+  CHECKOUT_SCHEDULED_REPLENISHMENT_SCHEMATICS_CONFIG
 } from './lib-configs/checkout-schematics-config';
 import { CUSTOMER_TICKETING_SCHEMATICS_CONFIG } from './lib-configs/customer-ticketing-schematics-config';
-import {
-  CDC_B2B_SCHEMATICS_CONFIG,
-  CDC_SCHEMATICS_CONFIG,
-} from './lib-configs/integration-libs/cdc-schematics-config';
+import { CDC_B2B_SCHEMATICS_CONFIG, CDC_SCHEMATICS_CONFIG } from './lib-configs/integration-libs/cdc-schematics-config';
 import { CDS_SCHEMATICS_CONFIG } from './lib-configs/integration-libs/cds-schematics-config';
 import { DIGITAL_PAYMENTS_SCHEMATICS_CONFIG } from './lib-configs/integration-libs/digital-payments-schematics-config';
 import { EPD_SCHEMATICS_CONFIG } from './lib-configs/integration-libs/epd-schematics-config';
@@ -37,34 +31,32 @@ import {
   ORGANIZATION_ADMINISTRATION_SCHEMATICS_CONFIG,
   ORGANIZATION_ORDER_APPROVAL_SCHEMATICS_CONFIG,
   ORGANIZATION_UNIT_ORDER_SCHEMATICS_CONFIG,
-  ORGANIZATION_USER_REGISTRATION_SCHEMATICS_CONFIG,
+  ORGANIZATION_USER_REGISTRATION_SCHEMATICS_CONFIG
 } from './lib-configs/organization-schematics-config';
 import { PDF_INVOICES_SCHEMATICS_CONFIG } from './lib-configs/pdf-invoices-schematics-config';
 import { PICKUP_IN_STORE_SCHEMATICS_CONFIG } from './lib-configs/pickup-in-store-schematics-config';
 import {
   PRODUCT_CONFIGURATOR_CPQ_SCHEMATICS_CONFIG,
   PRODUCT_CONFIGURATOR_RULEBASED_SCHEMATICS_CONFIG,
-  PRODUCT_CONFIGURATOR_TEXTFIELD_SCHEMATICS_CONFIG,
+  PRODUCT_CONFIGURATOR_TEXTFIELD_SCHEMATICS_CONFIG
 } from './lib-configs/product-configurator-schematics-config';
 import {
   PRODUCT_BULK_PRICING_SCHEMATICS_CONFIG,
   PRODUCT_FUTURE_STOCK_SCHEMATICS_CONFIG,
   PRODUCT_IMAGE_ZOOM_SCHEMATICS_CONFIG,
-  PRODUCT_VARIANTS_SCHEMATICS_CONFIG,
+  PRODUCT_VARIANTS_SCHEMATICS_CONFIG
 } from './lib-configs/product-schematics-config';
 import { QUALTRICS_SCHEMATICS_CONFIG } from './lib-configs/qualtrics-schematics-config';
 import { REQUESTED_DELIVERY_DATE_SCHEMATICS_CONFIG } from './lib-configs/requested-delivery-date-schematics-config';
 import { SMARTEDIT_SCHEMATICS_CONFIG } from './lib-configs/smartedit-schematics-config';
+import { CONTENTFULPREVIEW_SCHEMATICS_CONFIG } from './lib-configs/contentfulpreview-schematics-config';
 import { STOREFINDER_SCHEMATICS_CONFIG } from './lib-configs/storefinder-schematics-config';
 import {
   TRACKING_AEP_SCHEMATICS_CONFIG,
   TRACKING_GTM_SCHEMATICS_CONFIG,
-  TRACKING_PERSONALIZATION_SCHEMATICS_CONFIG,
+  TRACKING_PERSONALIZATION_SCHEMATICS_CONFIG
 } from './lib-configs/tracking-schematics-config';
-import {
-  USER_ACCOUNT_SCHEMATICS_CONFIG,
-  USER_PROFILE_SCHEMATICS_CONFIG,
-} from './lib-configs/user-schematics-config';
+import { USER_ACCOUNT_SCHEMATICS_CONFIG, USER_PROFILE_SCHEMATICS_CONFIG } from './lib-configs/user-schematics-config';
 import { Module, SchematicConfig } from './utils/lib-utils';
 
 /**
@@ -112,6 +104,7 @@ export const SCHEMATICS_CONFIGS: SchematicConfig[] = [
   REQUESTED_DELIVERY_DATE_SCHEMATICS_CONFIG,
 
   SMARTEDIT_SCHEMATICS_CONFIG,
+  CONTENTFULPREVIEW_SCHEMATICS_CONFIG,
 
   STOREFINDER_SCHEMATICS_CONFIG,
 

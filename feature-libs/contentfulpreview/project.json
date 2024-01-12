@@ -1,0 +1,52 @@
+{
+  "name": "contentfulpreview",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "feature-libs/contentfulpreview",
+  "prefix": "cx",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:ng-packagr",
+      "options": {
+        "tsConfig": "feature-libs/contentfulpreview/tsconfig.lib.json",
+        "project": "feature-libs/contentfulpreview/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "feature-libs/contentfulpreview/tsconfig.lib.prod.json"
+        }
+      }
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "feature-libs/contentfulpreview/test.ts",
+        "tsConfig": "feature-libs/contentfulpreview/tsconfig.spec.json",
+        "polyfills": [
+          "zone.js",
+          "zone.js/testing"
+        ],
+        "karmaConfig": "feature-libs/contentfulpreview/karma.conf.js"
+      }
+    },
+    "test-jest": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run test:schematics",
+        "cwd": "feature-libs/contentfulpreview"
+      }
+    },
+    "lint": {
+      "executor": "@angular-eslint/builder:lint",
+      "options": {
+        "lintFilePatterns": [
+          "feature-libs/contentfulpreview/**/*.ts",
+          "feature-libs/contentfulpreview/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": [
+    "type:feature"
+  ]
+}

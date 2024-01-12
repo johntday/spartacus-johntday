@@ -488,6 +488,15 @@
       "@spartacus/smartedit/root": [
         "feature-libs/smartedit/root/public_api"
       ],
+      "@spartacus/contentfulpreview/core": [
+        "feature-libs/contentfulpreview/core/public_api"
+      ],
+      "@spartacus/contentfulpreview": [
+        "feature-libs/contentfulpreview/public_api"
+      ],
+      "@spartacus/contentfulpreview/root": [
+        "feature-libs/contentfulpreview/root/public_api"
+      ],
       "@spartacus/storefinder/assets": [
         "feature-libs/storefinder/assets/public_api"
       ],

@@ -58,6 +58,7 @@
       "@spartacus/qualtrics",
       "@spartacus/requested-delivery-date",
       "@spartacus/smartedit",
+      "@spartacus/contentfulpreview",
       "@spartacus/storefinder",
       "@spartacus/tracking",
       "@spartacus/pickup-in-store",

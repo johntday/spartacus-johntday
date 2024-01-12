@@ -50,6 +50,7 @@
           "Requested-Delivery-Date",
           "S4HANA-Order-Management",
           "SmartEdit",
+          "ContentfulPreview",
           "Store-Finder",
           "Personalization",
           "Segment-Refs",
@@ -74,6 +75,7 @@
         "Image-Zoom",
         "Product-Variants",
         "SmartEdit",
+        "ContentfulPreview",
         "Store-Finder",
         "Personalization",
         "User-Account",
@@ -214,6 +216,10 @@
           {
             "value": "SmartEdit",
             "label": "SmartEdit"
+          },
+          {
+            "value": "ContentfulPreview",
+            "label": "ContentfulPreview"
           },
           {
             "value": "Store-Finder",

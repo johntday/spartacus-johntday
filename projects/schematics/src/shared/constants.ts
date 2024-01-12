@@ -185,6 +185,9 @@ export const EVENT_SERVICE = 'EventService';
 export const CDS_CONFIG = 'CdsConfig';
 export const CONTENTFUL_CONFIG = 'ContentfulConfig';
 export const SMART_EDIT_CONFIG = 'SmartEditConfig';
+export const SMART_EDIT_MODULE = 'SmartEditModule';
+
+export const CONTENTFUL_PREVIEW_CONFIG = 'ContentfulPreviewConfig';
 export const ADDRESS_BOOK_COMPONENT_SERVICE = 'AddressBookComponentService';
 export const CHECKOUT_GUARD = 'CheckoutGuard';
 export const LOGOUT_GUARD = 'LogoutGuard';
@@ -278,7 +281,8 @@ export const CMS_MAPPING_SERVICE = 'CmsMappingService';
 export const COMPONENT_HANDLER_SERVICE = 'ComponentHandlerService';
 export const CMS_INJECTOR_SERVICE = 'CmsInjectorService';
 export const SMART_EDIT_SERVICE = 'SmartEditService';
-export const SMART_EDIT_MODULE = 'SmartEditModule';
+export const CONTENTFUL_PREVIEW_SERVICE = 'ContentfulPreviewService';
+export const CONTENTFUL_PREVIEW_MODULE = 'ContentfulPreviewModule';
 export const STORE_FINDER_SEARCH_RESULT_COMPONENT =
   'StoreFinderSearchResultComponent';
 export const STORE_FINDER_SERVICE = 'StoreFinderService';

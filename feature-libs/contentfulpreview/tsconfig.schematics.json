@@ -1,9 +1,6 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": "./",
-    "outDir": "../../out-tsc/spec",
-    "strict": false,
     "module": "CommonJs",
     "types": [
       "jest"
@@ -468,20 +465,11 @@
       "@spartacus/requested-delivery-date/root": [
         "../../feature-libs/requested-delivery-date/root/public_api"
       ],
-      "@spartacus/smartedit/core": [,
-      "../../feature-libs/smartedit/core/public_api"
-    ],
-      "@spartacus/smartedit": [
-        "../../feature-libs/smartedit/public_api"
-      ],
-      "@spartacus/smartedit/root": [
-        "../../feature-libs/smartedit/root/public_api"
-      ],
       "@spartacus/contentfulpreview/core": [
-      "../../feature-libs/contentfulpreview/core/public_api",
+        "../../feature-libs/contentfulpreview/core/public_api"
       ],
       "@spartacus/contentfulpreview": [
-      "../../feature-libs/contentfulpreview/public_api",
+        "../../feature-libs/contentfulpreview/public_api"
       ],
       "@spartacus/contentfulpreview/root": [
         "../../feature-libs/contentfulpreview/root/public_api"
@@ -645,10 +633,26 @@
       "@spartacus/storefront": [
         "../../projects/storefrontlib/public_api"
       ]
-    }
+    },
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
   "include": [
-    "ssr/**/*.spec.ts",
-    "ssr/**/*.d.ts"
+    "schematics/**/*.ts"
+  ],
+  "exclude": [
+    "schematics/*/files/**/*",
+    "schematics/**/*_spec.ts"
   ]
 }

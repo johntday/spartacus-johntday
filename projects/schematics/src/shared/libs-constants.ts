@@ -159,6 +159,9 @@ export const SPARTACUS_REQUESTED_DELIVERY_DATE_ASSETS = `@spartacus/requested-de
 export const SPARTACUS_SMARTEDIT = `@spartacus/smartedit`;
 export const SPARTACUS_SMARTEDIT_ROOT = `@spartacus/smartedit/root`;
 
+export const SPARTACUS_CONTENTFULPREVIEW = `@spartacus/contentfulpreview`;
+export const SPARTACUS_CONTENTFULPREVIEW_ROOT = `@spartacus/contentfulpreview/root`;
+
 export const SPARTACUS_STOREFINDER = `@spartacus/storefinder`;
 export const SPARTACUS_STOREFINDER_ROOT = `@spartacus/storefinder/root`;
 export const SPARTACUS_STOREFINDER_ASSETS = `@spartacus/storefinder/assets`;
@@ -264,6 +267,8 @@ export const QUALTRICS_FEATURE_NAME = 'Qualtrics';
 export const REQUESTED_DELIVERY_DATE_FEATURE_NAME = 'Requested-Delivery-Date';
 
 export const SMARTEDIT_FEATURE_NAME = 'SmartEdit';
+
+export const CONTENTFULPREVIEW_FEATURE_NAME = 'ContentfulPreview';
 
 export const STOREFINDER_FEATURE_NAME = 'Store-Finder';
 

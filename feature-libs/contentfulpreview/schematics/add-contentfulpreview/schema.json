@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "ContentfulPreviewSchematics",
+  "title": "ContentfulPreview Schematics",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "debug": {
+      "description": "Display additional details during the running process.",
+      "type": "boolean",
+      "default": false
+    },
+    "lazy": {
+      "type": "boolean",
+      "description": "Lazy load the Contentful Preview features.",
+      "default": true
+    },
+    "features": {
+      "type": "array",
+      "uniqueItems": true,
+      "default": [
+        "ContentfulPreview"
+      ]
+    },
+    "storefrontPreviewRoute": {
+      "type": "string",
+      "description": "The storefront preview route. (e.g. cx-preview)",
+      "x-prompt": "[ContentfulPreview] What is the storefront preview route? (optional)"
+    },
+    "allowOrigin": {
+      "type": "string",
+      "description": "The URL for which to allow origin. (e.g. localhost:9002)",
+      "x-prompt": "[ContentfulPreview] URL for which to allow origin? (optional)"
+    }
+  },
+  "required": []
+}
