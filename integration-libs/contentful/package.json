@@ -1,5 +1,5 @@
 {
-  "name": "@spartacus/contentful",
+  "name": "@commerce-solutions/contentful",
   "version": "6.7.0",
   "description": "Contentful library for Spartacus",
   "keywords": [
