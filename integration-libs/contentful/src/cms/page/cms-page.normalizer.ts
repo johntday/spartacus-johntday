@@ -4,7 +4,6 @@ import {
   CmsComponent,
   CmsResponsiveBannerComponentMedia,
   CmsStructureModel,
-  ContentSlotComponentData,
   ContentSlotData,
   Converter,
   Occ,
@@ -15,10 +14,15 @@ import {
 import { Contentful } from './cms-page.model';
 
 @Injectable({ providedIn: 'root' })
-export class ContentfulOccCmsPageNormalizer implements Converter<Contentful.CmsPageResponse, CmsStructureModel> {
+export class ContentfulOccCmsPageNormalizer
+  implements Converter<Contentful.CmsPageResponse, CmsStructureModel>
+{
   uniqueSourceSlots: Contentful.CmsSlot[] = [];
 
-  convert(source: Contentful.CmsPageResponse, target: CmsStructureModel = {}): CmsStructureModel {
+  convert(
+    source: Contentful.CmsPageResponse,
+    target: CmsStructureModel = {}
+  ): CmsStructureModel {
     // console.log('ContentfulOccCmsPageNormalizer.input', JSON.stringify(source, null, 2));
     this.normalizePageData(source, target);
     this.normalizePageSlotData(source, target);
@@ -30,7 +34,10 @@ export class ContentfulOccCmsPageNormalizer implements Converter<Contentful.CmsP
   /**
    * Converts the OCC cms page model to the `Page` in the `CmsStructureModel`.
    */
-  protected normalizePageData(source: Contentful.CmsPageResponse, target: CmsStructureModel): void {
+  protected normalizePageData(
+    source: Contentful.CmsPageResponse,
+    target: CmsStructureModel
+  ): void {
     const sourcePage = source.data?.cmsPageCollection?.items?.[0];
     const sourceTemplate = sourcePage?.template;
     if (!source || !sourcePage) {
@@ -55,14 +62,25 @@ export class ContentfulOccCmsPageNormalizer implements Converter<Contentful.CmsP
   /**
    * Adds a ContentSlotData for each page slot in the `CmsStructureModel`.
    */
-  protected normalizePageSlotData(source: Contentful.CmsPageResponse, target: CmsStructureModel): void {
+  protected normalizePageSlotData(
+    source: Contentful.CmsPageResponse,
+    target: CmsStructureModel
+  ): void {
     target.page = target.page ?? {};
     target.page.slots = {};
 
-    const mainSlots = source.data?.cmsPageCollection?.items?.[0]?.template?.slotsCollection?.items;
-    const headerSlots = source.data?.cmsPageCollection?.items?.[0]?.template?.header?.slotsCollection?.items;
-    const footerSlots = source.data?.cmsPageCollection?.items?.[0]?.template?.footer?.slotsCollection?.items;
-    const navigationSlots = source.data?.cmsPageCollection?.items?.[0]?.template?.navigation?.slotsCollection?.items;
+    const mainSlots =
+      source.data?.cmsPageCollection?.items?.[0]?.template?.slotsCollection
+        ?.items;
+    const headerSlots =
+      source.data?.cmsPageCollection?.items?.[0]?.template?.header
+        ?.slotsCollection?.items;
+    const footerSlots =
+      source.data?.cmsPageCollection?.items?.[0]?.template?.footer
+        ?.slotsCollection?.items;
+    const navigationSlots =
+      source.data?.cmsPageCollection?.items?.[0]?.template?.navigation
+        ?.slotsCollection?.items;
 
     const sourceSlots = mainSlots
       ?.concat(headerSlots ?? [])
@@ -83,25 +101,30 @@ export class ContentfulOccCmsPageNormalizer implements Converter<Contentful.CmsP
   /**
    * Registers the `ContentSlotComponentData` for each component.
    */
-  protected normalizePageComponentData(_source: Contentful.CmsPageResponse, target: CmsStructureModel): void {
+  protected normalizePageComponentData(
+    _source: Contentful.CmsPageResponse,
+    target: CmsStructureModel
+  ): void {
     if (!this.uniqueSourceSlots) {
       return;
     }
 
     for (const slot of this.uniqueSourceSlots ?? []) {
-      for (const component of slot.componentCollection?.items ?? []) {
-        const comp: ContentSlotComponentData = {
-          uid: component.uid,
-          typeCode: component.typeCode,
-          flexType: component.typeCode,
-        };
+      const targetSlot = target.page?.slots?.[`${slot.uid}`];
 
-        const targetSlot = target.page?.slots?.[`${slot.uid}`];
+      for (const component of slot.componentCollection?.items ?? []) {
+        const comp: any = this.normalizeComponent(component);
+
         if (targetSlot) {
           if (!targetSlot.components) {
             targetSlot.components = [];
           }
-          targetSlot.components.push(comp);
+          targetSlot.components.push({
+            id: comp.id,
+            uid: comp.uid,
+            flexType: comp.typeCode,
+            typeCode: comp.typeCode,
+          });
         }
       } // for component
     } // for slot
@@ -113,7 +136,10 @@ export class ContentfulOccCmsPageNormalizer implements Converter<Contentful.CmsP
    * If the data is not populated in this payload, it is loaded separately
    * (`OccCmsComponentAdapter`).
    */
-  protected normalizeComponentData(_source: Contentful.CmsPageResponse, target: CmsStructureModel): void {
+  protected normalizeComponentData(
+    _source: Contentful.CmsPageResponse,
+    target: CmsStructureModel
+  ): void {
     if (!this.uniqueSourceSlots) {
       return;
     }
@@ -123,7 +149,8 @@ export class ContentfulOccCmsPageNormalizer implements Converter<Contentful.CmsP
         if (!target.components) {
           target.components = [];
         }
-        const targetComponent: CmsComponent = this.normalizeComponent(component);
+        const targetComponent: CmsComponent =
+          this.normalizeComponent(component);
         target.components.push(targetComponent);
       }
     }
@@ -132,7 +159,10 @@ export class ContentfulOccCmsPageNormalizer implements Converter<Contentful.CmsP
   /**
    * Normalizes the page robot string to an array of `PageRobotsMeta` items.
    */
-  protected normalizeRobots(sourceRobot: string | undefined, target: Page): void {
+  protected normalizeRobots(
+    sourceRobot: string | undefined,
+    target: Page
+  ): void {
     const robots = [];
     if (sourceRobot) {
       switch (sourceRobot) {
@@ -175,13 +205,17 @@ export class ContentfulOccCmsPageNormalizer implements Converter<Contentful.CmsP
         'CMSFlexComponent',
       ].includes(source.typeCode)
     ) {
-      throw new Error(`Invalid typeCode '${source.typeCode}' for component.uid '${source.uid}'`);
+      throw new Error(
+        `Invalid typeCode '${source.typeCode}' for component.uid '${source.uid}'`
+      );
     }
 
     const target = flattenObj(source);
 
     if (source.typeCode === 'SimpleBannerComponent') {
-      const sourceBannerComponent = <Contentful.CmsBannerComponent>source.cmsBannerComponent;
+      const sourceBannerComponent = <Contentful.CmsBannerComponent>(
+        source.cmsBannerComponent
+      );
       const mobile = sourceBannerComponent?.media?.mobile;
       const tablet = sourceBannerComponent?.media?.tablet;
       const desktop = sourceBannerComponent?.media?.desktop;
@@ -198,10 +232,14 @@ export class ContentfulOccCmsPageNormalizer implements Converter<Contentful.CmsP
           widescreen: this.normalizeMedia(widescreen, altText),
         } as CmsResponsiveBannerComponentMedia;
       } else {
-        throw new Error(`Invalid media configuration for component.uid '${source.uid}'`);
+        throw new Error(
+          `Invalid media configuration for component.uid '${source.uid}'`
+        );
       }
     } else if (source.typeCode === 'ProductCarouselComponent') {
-      const sourceProductCarouselComponent = <Contentful.CmsProductCarouselComponent>source.cmsProductCarouselComponent;
+      const sourceProductCarouselComponent = <
+        Contentful.CmsProductCarouselComponent
+      >source.cmsProductCarouselComponent;
 
       if (
         sourceProductCarouselComponent &&
@@ -209,7 +247,8 @@ export class ContentfulOccCmsPageNormalizer implements Converter<Contentful.CmsP
         Array.isArray(sourceProductCarouselComponent.productCodes) &&
         sourceProductCarouselComponent.productCodes.length > 0
       ) {
-        target['productCodes'] = sourceProductCarouselComponent.productCodes.join(' ');
+        target['productCodes'] =
+          sourceProductCarouselComponent.productCodes.join(' ');
       }
     }
 
@@ -218,7 +257,10 @@ export class ContentfulOccCmsPageNormalizer implements Converter<Contentful.CmsP
     return target as CmsComponent;
   }
 
-  protected normalizeMedia(source: Contentful.Image | undefined, altText: string | undefined): CmsBannerComponentMedia {
+  protected normalizeMedia(
+    source: Contentful.Image | undefined,
+    altText: string | undefined
+  ): CmsBannerComponentMedia {
     return {
       url: source?.url,
       altText: source?.title || altText || '',

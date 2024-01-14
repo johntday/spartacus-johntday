@@ -38,7 +38,13 @@ export class ContentfulPreviewService {
         componentType: string,
         parentId: string
       ) => {
-        return this.renderComponent(componentId, componentType, parentId);
+        const renderComp = this.renderComponent(
+          componentId,
+          componentType,
+          parentId
+        );
+        // console.log('renderComponent', JSON.stringify(renderComp, null, 2));
+        return renderComp;
       };
 
       // reprocess page
@@ -153,31 +159,16 @@ export class ContentfulPreviewService {
     properties: any
   ): void {
     if (properties) {
-      // check each group of properties, e.g. contentful
-      Object.keys(properties).forEach((group) => {
-        const name = 'data-' + group + '-';
-        const groupProps = properties[group];
+      Object.keys(properties).forEach((name) => {
 
-        // check each property in the group
-        Object.keys(groupProps).forEach((propName) => {
-          const propValue = groupProps[propName];
-          if (propName === 'classes') {
-            const classes = propValue.split(' ');
-            classes.forEach((classItem: string) => {
-              renderer.addClass(element, classItem);
-            });
-          } else {
+        const value = properties[name];
+        if (value) {
             renderer.setAttribute(
               element,
-              name +
-                propName
-                  .split(/(?=[A-Z])/)
-                  .join('-')
-                  .toLowerCase(),
-              propValue
+            name,
+            value,
             );
           }
-        });
       });
     }
   }

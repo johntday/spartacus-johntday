@@ -15,11 +15,20 @@ export class ContentfulpreviewComponentDecorator extends ComponentDecorator {
     renderer: Renderer2,
     component: ContentSlotComponentData
   ): void {
-    if (component) {
+    // console.log(
+    //   'ContentfulpreviewComponentDecorator.decorate',
+    //   JSON.stringify(component, null, 2)
+    // );
+    const id = (<any>component)?.id;
+    if (id) {
+      const contentfulAttr = {
+        'data-contentful-entry-id': id,
+      };
       this.contentfulPreviewService.addContentfulPreviewContract(
         element,
         renderer,
-        component.properties
+        // component.properties
+        contentfulAttr
       );
     }
   }

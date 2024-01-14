@@ -42,10 +42,14 @@ export const DEFAULT_CONTENTFUL_CONFIG: ContentfulConfig = {
   },
 };
 
-export interface ContentfulCmsComponent {
-  id: string;
-}
+// export interface ContentfulCmsComponent {
+//   id?: string;
+// }
+//
+// declare module '@spartacus/core' {
+//   interface CmsComponent extends ContentfulCmsComponent {}
+// }
 
-declare module '@spartacus/core' {
-  interface CmsComponent extends ContentfulCmsComponent {}
-}
+// declare module '@spartacus/core' {
+//   interface ContentSlotComponentData extends ContentfulCmsComponent {}
+// }
