@@ -1,6 +1,6 @@
 {
   "name": "@spartacus/contentful",
-  "version": "6.7.7",
+  "version": "6.7.0",
   "description": "Contentful library for Spartacus",
   "keywords": [
     "spartacus",

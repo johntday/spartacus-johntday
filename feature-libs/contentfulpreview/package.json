@@ -1,6 +1,6 @@
 {
   "name": "@spartacus/contentfulpreview",
-  "version": "6.7.7",
+  "version": "6.7.0",
   "description": "Contentful Preview feature library for Spartacus",
   "keywords": [
     "spartacus",
@@ -10,7 +10,7 @@
   ],
   "homepage": "https://github.com/SAP/spartacus",
   "repository": "https://github.com/SAP/spartacus/tree/develop/feature-libs/contentfulpreview",
-  "license": "Apache-2.0",
+  "license": "LGPL-3.0-only",
   "scripts": {
     "build:schematics": "npm run clean:schematics && ../../node_modules/.bin/tsc -p ./tsconfig.schematics.json",
     "clean:schematics": "../../node_modules/.bin/rimraf --glob \"schematics/**/*.js\" \"schematics/**/*.js.map\" \"schematics/**/*.d.ts\"",
