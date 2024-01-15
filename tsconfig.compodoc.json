@@ -497,6 +497,15 @@
       "@spartacus/contentfulpreview/root": [
         "feature-libs/contentfulpreview/root/public_api"
       ],
+      "@spartacus/contentful/core": [
+        "feature-libs/contentful/core/public_api"
+      ],
+      "@spartacus/contentful": [
+        "feature-libs/contentful/public_api"
+      ],
+      "@spartacus/contentful/root": [
+        "feature-libs/contentful/root/public_api"
+      ],
       "@spartacus/storefinder/assets": [
         "feature-libs/storefinder/assets/public_api"
       ],

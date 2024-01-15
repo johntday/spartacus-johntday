@@ -1,5 +1,5 @@
 {
-  "name": "@commerce-solutions/contentful",
+  "name": "@spartacus/contentful",
   "version": "6.7.0",
   "description": "Contentful library for Spartacus",
   "keywords": [
@@ -7,8 +7,8 @@
     "storefront",
     "contentful"
   ],
-  "homepage": "https://github.com/johntday/spartacus",
-  "repository": "https://github.com/johntday/spartacus/tree/develop/integration-libs/contentful",
+  "homepage": "https://github.com/johntday/spartacus-johntday",
+  "repository": "https://github.com/johntday/spartacus-johntday/tree/develop/integration-libs/contentful",
   "license": "LGPL-3.0-only",
   "scripts": {
     "build:schematics": "npm run clean:schematics && ../../node_modules/.bin/tsc -p ./tsconfig.schematics.json",

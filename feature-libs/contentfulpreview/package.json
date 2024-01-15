@@ -1,5 +1,5 @@
 {
-  "name": "@commerce-solutions/contentfulpreview",
+  "name": "@spartacus/contentfulpreview",
   "version": "6.7.0",
   "description": "Contentful Preview feature library for Spartacus",
   "keywords": [
@@ -8,8 +8,8 @@
     "storefront",
     "contentful"
   ],
-  "homepage": "https://github.com/SAP/spartacus",
-  "repository": "https://github.com/SAP/spartacus/tree/develop/feature-libs/contentfulpreview",
+  "homepage": "https://github.com/johntday/spartacus-johntday",
+  "repository": "https://github.com/johntday/spartacus-johntday/tree/develop/feature-libs/contentfulpreview",
   "license": "LGPL-3.0-only",
   "scripts": {
     "build:schematics": "npm run clean:schematics && ../../node_modules/.bin/tsc -p ./tsconfig.schematics.json",
@@ -25,6 +25,7 @@
     "@angular/core": "^15.2.9",
     "@spartacus/core": "6.7.0",
     "@spartacus/schematics": "6.7.0",
+    "@spartacus/contentful": "6.7.0",
     "rxjs": "^6.6.0"
   },
   "publishConfig": {

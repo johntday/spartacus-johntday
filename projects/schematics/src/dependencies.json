@@ -111,6 +111,7 @@
     "@angular/core": "^15.2.9",
     "@spartacus/core": "6.7.0",
     "@spartacus/schematics": "6.7.0",
+    "@spartacus/contentful": "6.7.0",
     "rxjs": "^6.6.0"
   },
   "@spartacus/customer-ticketing": {

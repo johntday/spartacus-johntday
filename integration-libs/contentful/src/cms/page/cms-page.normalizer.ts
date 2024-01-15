@@ -120,6 +120,7 @@ export class ContentfulOccCmsPageNormalizer
             targetSlot.components = [];
           }
           targetSlot.components.push({
+            // @ts-ignore
             id: comp.id,
             uid: comp.uid,
             flexType: comp.typeCode,

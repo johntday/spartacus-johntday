@@ -34,11 +34,6 @@ const MISSING_PACKAGE_DATA: MissingPackageMigration[] = [
       "We've found imports from @spartacus/smartedit package which is not installed. If you are using the Smartedit feature you can configure it by running schematics `ng add @spartacus/smartedit`. If you only need to install package add it with npm (`npm i @spartacus/smartedit`) or yarn (`yarn add @spartacus/smartedit`). If you are not using Smartedit package check why you have imports from this library.",
   },
   {
-    package: '@spartacus/contentfulpreview',
-    comment:
-      "We've found imports from @spartacus/contentfulpreview package which is not installed. If you are using the contentfulpreview feature you can configure it by running schematics `ng add @spartacus/contentfulpreview`. If you only need to install package add it with npm (`npm i @spartacus/contentfulpreview`) or yarn (`yarn add @spartacus/contentfulpreview`). If you are not using contentfulpreview package check why you have imports from this library.",
-  },
-  {
     package: '@spartacus/qualtrics',
     comment:
       "We've found imports from @spartacus/qualtrics package which is not installed. If you are using the Qualtrics feature you can configure it by running schematics `ng add @spartacus/qualtrics`. If you only need to install package add it with npm (`npm i @spartacus/qualtrics`) or yarn (`yarn add @spartacus/qualtrics`). If you are not using Qualtrics package check why you have imports from this library.",
