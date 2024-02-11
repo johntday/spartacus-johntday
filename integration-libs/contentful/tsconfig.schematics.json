@@ -582,6 +582,9 @@
       "@spartacus/cdc/user-profile": [
         "../../integration-libs/cdc/user-profile/public_api"
       ],
+      "@spartacus/contentful/core": [
+        "../../integration-libs/contentful/core/public_api"
+      ],
       "@spartacus/contentful": [
         "../../integration-libs/contentful/public_api"
       ],
@@ -649,10 +652,10 @@
     "esModuleInterop": true
   },
   "include": [
-    "src/schematics/**/*.ts"
+    "core/schematics/**/*.ts"
   ],
   "exclude": [
-    "src/schematics/*/files/**/*",
-    "src/schematics/**/*_spec.ts"
+    "core/schematics/*/files/**/*",
+    "core/schematics/**/*_spec.ts"
   ]
 }

@@ -6,6 +6,8 @@
     "strict": false,
     "types": ["jasmine", "node"]
   },
-  "files": ["src/test.ts"],
+  "files": [
+    "core/test.ts"
+  ],
   "include": ["**/*.spec.ts", "**/*.d.ts"]
 }

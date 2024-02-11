@@ -1,0 +1,79 @@
+%LandingPageTestTemplate {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1700px;
+  margin: auto;
+
+  cx-page-slot {
+    cx-banner {
+      cx-media {
+        img {
+          display: flex;
+          height: auto;
+        }
+      }
+    }
+
+    &.SectionTest1 {
+      max-width: var(--cx-page-width-max);
+      margin: auto;
+      margin-top: 30px;
+
+      @include media-breakpoint-down(md) {
+        margin-top: 0;
+      }
+    }
+
+    &.SectionTest2A {
+      margin-inline-start: auto;
+    }
+
+    &.SectionTest2B {
+      margin-inline-end: auto;
+    }
+
+    &.SectionTest2A,
+    &.SectionTest2B {
+      --cx-flex-basis: 50%;
+      max-width: 570px;
+      @include media-breakpoint-down(md) {
+        --cx-flex-basis: 100%;
+        max-width: 100%;
+        > * {
+          --cx-flex-basis: 50%;
+        }
+      }
+
+      @include media-breakpoint-only(xs) {
+        > * {
+          --cx-flex-basis: 100%;
+        }
+      }
+    }
+
+    &.SectionTest3 {
+      max-width: var(--cx-page-width-max);
+      margin: auto;
+    }
+
+    &.SectionTest4 {
+      color: var(--cx-color, var(--cx-color-light));
+      flex-wrap: nowrap;
+
+      @include media-breakpoint-down(md) {
+        flex-wrap: wrap;
+        > * {
+          --cx-flex-basis: 50%;
+          border-bottom: solid 1px currentColor;
+          border-inline-end: solid 1px currentColor;
+        }
+      }
+
+      @include media-breakpoint-only(xs) {
+        > * {
+          --cx-flex-basis: 100%;
+        }
+      }
+    }
+  }
+}
